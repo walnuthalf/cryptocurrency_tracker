@@ -5,7 +5,7 @@ defmodule CryptocurrencyTracker.Mixfile do
     [
       app: :cryptocurrency_tracker,
       version: "0.0.1",
-      elixir: "~> 1.4",
+      elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
@@ -38,7 +38,10 @@ defmodule CryptocurrencyTracker.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:httpoison, "~> 1.0.0"},
+      {:poison, "~> 3.1.0"},
+      {:stream_data, "~> 0.4.1", only: :test}
     ]
   end
 
