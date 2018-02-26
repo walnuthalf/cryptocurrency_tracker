@@ -52,7 +52,7 @@ defmodule CryptocurrencyTrackerWeb.TrackerChannelTest do
   test "rates_at_time replies with symbol_to_rate", %{socket: socket} do
     timestamp_str = DateTime.utc_now() |> DateTime.to_iso8601
     ref = push socket, "rates_at_time", %{"timestamp" => timestamp_str}
-    assert_reply ref, :ok, %{"BTC" => btc_rate, "ETH" => eth_rate, "BCH"=> bch_rate}
+    assert_reply ref, :ok, %{"BTC" => _btc_rate, "ETH" => _eth_rate, "BCH"=> _bch_rate}
   end
 
   test "rates_at_time replies with an error message for invalid input", %{socket: socket} do
