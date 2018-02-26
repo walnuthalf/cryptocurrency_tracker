@@ -32,7 +32,11 @@ defmodule CryptocurrencyTrackerWeb.ConnCase do
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(CryptocurrencyTracker.Repo, {:shared, self()})
     end
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    conn = Phoenix.ConnTest.build_conn()
+      |> Plug.Conn.put_req_header("content-type", "application/json")
+      |> Plug.Conn.put_req_header("accepts", "application/json")
+
+    {:ok, conn: conn}
   end
 
 end
