@@ -28,7 +28,7 @@ defmodule CryptocurrencyTrackerWeb.CalculatorController do
   end
   
   defp closest_rate(symbol, at_time) do
-    case Currencies.get_rate_infos_at_time(symbol, at_time) do
+    case Currencies.get_rate_info_at_time(symbol, at_time) do
       {:ok, rate_info} -> rate_info.rate
       _ -> 0.0
     end

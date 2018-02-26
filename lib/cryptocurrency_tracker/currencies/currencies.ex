@@ -8,6 +8,16 @@ defmodule CryptocurrencyTracker.Currencies do
 
   alias CryptocurrencyTracker.Currencies.RateInfo
 
+  def get_symbol_to_rate_at_time(at_time) do
+    symbols = ["BTC", "ETH", "BCH"]
+    Enum.map(symbols, fn symbol ->
+      case get_rate_info_at_time(symbol, at_time) do
+        {:ok, rate_info} -> {symbol, rate_info.rate}
+        :no_results -> {symbol, :no_results}
+      end
+    end) |> Map.new
+  end 
+
   def get_earliest_rate_info(symbol) do
     query = from r in RateInfo, 
       where: r.symbol == ^symbol,
@@ -19,7 +29,7 @@ defmodule CryptocurrencyTracker.Currencies do
     end
   end 
 
-  def get_rate_infos_at_time(symbol, at_time) do
+  def get_rate_info_at_time(symbol, at_time) do
     query = from r in RateInfo, 
       where: (r.observed_at < ^at_time) and (r.symbol == ^symbol),
       order_by: [desc: r.observed_at],

@@ -24,9 +24,13 @@ defmodule CryptocurrencyTracker.Validators do
   end
 
   def datetime_validator(datetime_str) do
-    case DateTime.from_iso8601(datetime_str) do 
-      {:ok,datetime, _} -> {:ok, datetime} 
-      _ -> :error
+    if is_bitstring(datetime_str) do
+      case DateTime.from_iso8601(datetime_str) do 
+        {:ok,datetime, _} -> {:ok, datetime} 
+        _ -> :error
+      end
+    else
+      :error
     end
   end
 
