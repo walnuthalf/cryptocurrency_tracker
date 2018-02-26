@@ -1,6 +1,5 @@
 defmodule CryptocurrencyTracker.Ticker do
   use GenServer
-  alias CryptocurrencyTracker.Dispatcher
 
   @refresh_period 2000
   @price_endpoint "https://min-api.cryptocompare.com/data/price?"
