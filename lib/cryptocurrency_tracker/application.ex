@@ -14,6 +14,7 @@ defmodule CryptocurrencyTracker.Application do
       supervisor(CryptocurrencyTrackerWeb.Endpoint, []),
       # Start your own worker by calling: CryptocurrencyTracker.Worker.start_link(arg1, arg2, arg3)
       # worker(CryptocurrencyTracker.Worker, [arg1, arg2, arg3]),
+      supervisor(CryptocurrencyTracker.TickerSupervisor, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
