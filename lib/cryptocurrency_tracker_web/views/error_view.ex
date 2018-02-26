@@ -1,6 +1,17 @@
 defmodule CryptocurrencyTrackerWeb.ErrorView do
   use CryptocurrencyTrackerWeb, :view
 
+  def render("invalid_parameters.json", %{details: errors}) do
+    %{error: "Invalid parameters", 
+      details: errors
+    }
+  end
+
+  def render("missing_parameters.json", %{params: params}) do
+    %{error: "Missing parameters", 
+      "expected_parameters": params}
+  end
+
   def render("404.json", _assigns) do
     %{errors: %{detail: "Page not found"}}
   end

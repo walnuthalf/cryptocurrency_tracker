@@ -8,6 +8,29 @@ defmodule CryptocurrencyTracker.Currencies do
 
   alias CryptocurrencyTracker.Currencies.RateInfo
 
+  def get_earliest_rate_info(symbol) do
+    query = from r in RateInfo, 
+      where: r.symbol == ^symbol,
+      order_by: [asc: r.observed_at],
+      limit: 1
+    case Repo.all(query) do
+      [rate_info] -> {:ok, rate_info}
+      [] -> :no_results 
+    end
+  end 
+
+  def get_rate_infos_at_time(symbol, at_time) do
+    query = from r in RateInfo, 
+      where: (r.observed_at < ^at_time) and (r.symbol == ^symbol),
+      order_by: [desc: r.observed_at],
+      limit: 1
+
+    case Repo.all(query) do
+      [rate_info] -> {:ok, rate_info}
+      [] -> get_earliest_rate_info(symbol)
+    end
+  end
+
   @doc """
   Returns the list of rate_infos.
 

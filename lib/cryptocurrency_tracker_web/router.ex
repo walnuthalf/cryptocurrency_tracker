@@ -7,5 +7,6 @@ defmodule CryptocurrencyTrackerWeb.Router do
 
   scope "/api", CryptocurrencyTrackerWeb do
     pipe_through :api
+    get "/calculator", CalculatorController, :calculate 
   end
 end
